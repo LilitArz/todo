@@ -1,0 +1,17 @@
+{
+    "javascript.validate.enable": false,
+    "javascript.format.enable": false,
+    "editor.formatOnSave": true,
+    "eslint.alwaysShowStatus": true,
+    "eslint.run": "onSave",
+    "prettier.semi": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript"
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "git-blame.gitWebUrl": ""
+}
