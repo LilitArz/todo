@@ -7,6 +7,7 @@ import { ITodo } from './utils/helpers/types';
 
 function App() {
     const [state, setState] = useState<ITodo[]>([]);
+    const [filter, setFilter] = useState<string>('All');
 
     useEffect(() => {
         getTodos().then((response) => {

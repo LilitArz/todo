@@ -4,10 +4,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  align-items: center;
   width: 1500px;
   height: 500px;
   text-align: center;
+  border-collapse: collapse;
 }
 
 .todo-list {
@@ -16,6 +16,17 @@ body {
   border-radius: 8px; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   width: 1000px;
+  position: relative;
+  text-align: center;
+}
+
+.todo-list select {
+  position: absolute;
+  right: 5%;
+  top: 10%;
+  background-color: rgb(212, 212, 212);
+  border-radius: 0%;
+  border-bottom: 0%
 }
 
 .todo-item {
@@ -42,3 +53,17 @@ body {
   text-decoration: line-through; 
 }
 
+.link-button {
+  color: white;
+  display: flex;
+  text-decoration: none;
+  vertical-align: center;
+  justify-content: center;
+  border-radius: 10px;
+  position: absolute;
+  left: 5%;
+  top: 10%;
+  width: 100px;
+  height: 50px;
+  background-color: rgb(103, 103, 227);
+}
