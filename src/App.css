@@ -20,14 +20,14 @@ body {
   text-align: center;
 }
 
-.todo-list select {
+/* .todo-list select {
   position: absolute;
   right: 5%;
   top: 10%;
-  background-color: rgb(212, 212, 212);
+  background: whitesmoke;
   border-radius: 0%;
   border-bottom: 0%
-}
+} */
 
 .todo-item {
   background-color: white; 
@@ -66,4 +66,15 @@ body {
   width: 100px;
   height: 50px;
   background-color: rgb(103, 103, 227);
+}
+
+select {
+  color: rgb(0, 0, 0);
+  display: flex;
+  border-radius: 10px;
+  left: 85%;
+  top: 13%;
+  position: absolute;
+  background: whitesmoke;
+
 }

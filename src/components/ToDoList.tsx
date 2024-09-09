@@ -1,11 +1,11 @@
-import { AddToDo } from './AddToDo';
 import { List } from './List';
+import { ToDoFilter } from './ToDoFilter';
 
 export const ToDoList = () => {
     return (
         <div>
-            <AddToDo />
             <List />
+            <ToDoFilter/>
         </div>
     );
 };
