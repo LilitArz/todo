@@ -3,8 +3,8 @@ import { ITodosContextType, ITodosFilterType } from './types';
 import { FILTER_KEYS } from '../enum';
 
 export const ToDoContext = React.createContext<ITodosContextType>({
-    state: [],
-    setState: () => {},
+    todos: [],
+    setTodos: () => {},
     remove: () => {},
     complete: () => {},
     update: () => {},
@@ -14,5 +14,4 @@ export const ToDoContext = React.createContext<ITodosContextType>({
 export const ContextForFilter = React.createContext<ITodosFilterType>({
     filter: FILTER_KEYS.all,
     setFilter: () => {},
-
 })

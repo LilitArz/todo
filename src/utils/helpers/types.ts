@@ -18,8 +18,8 @@ export interface IAddTodoItem {
 }
 
 export interface ITodosContextType {
-    state: ITodo[];
-    setState: (todos: ITodo[]) => void;
+    todos: ITodo[];
+    setTodos: (todos: ITodo[]) => void;
     remove: (id: number) => void;
     complete: (id: number) => void;
     update: (id: number, todo: string) => void;

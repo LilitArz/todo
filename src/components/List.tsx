@@ -6,11 +6,11 @@ import { ToDoFilter } from './ToDoFilter';
 import { FILTER_KEYS } from '../utils/enum';
 
 export const List: React.FC = () => {
-    const { state } = useContext(ToDoContext);
+    const { todos } = useContext(ToDoContext);
     const { filter } = useContext(ContextForFilter);
 
     const filteredTodos = useMemo(() => {
-        return state.filter((todo) => {
+        return todos.filter((todo) => {
             switch (filter) {
                 case FILTER_KEYS.done:
                     return todo.completed;
@@ -20,11 +20,12 @@ export const List: React.FC = () => {
                     return true;
             }
         });
-    }, [state, filter]);
+    }, [todos, filter]);
+
     return (
         <div className="todo-list">
             <h1>TODO LIST</h1>
-            <Link className="link-button" to="/addtodo">
+            <Link className="link-button" to="/add-todo">
                 Add Task
             </Link>
             <ToDoFilter />
