@@ -1,40 +1,38 @@
-import { useContext, useState } from 'react';
+import { SetStateAction, useContext, useState } from 'react';
 import { ITodo } from '../utils/helpers/types';
-import { ToDoContext } from '../TodoContext';
+import { ToDoContext } from '../utils/helpers/contexts';
 
 interface Props {
     todo: ITodo;
 }
 export const ToDoItem: React.FC<Props> = ({ todo }) => {
     const { remove, complete, update } = useContext(ToDoContext);
-    const [edit, setEdit] = useState<boolean>(false);
-    const [editText, setEditText] = useState<string>(todo.todo);
-
-    const handleEditClick = () => {
-        setEdit(true);
-    };
+    const [editedText, setEditedText] = useState<string>('');
 
     const handleSaveClick = () => {
-        if (editText.trim()) {
-            update(todo.id, editText);
-            setEdit(false);
+        if (editedText.trim()) {
+            setEditedText('');
+            update(todo.id, editedText);
         }
     };
 
     const handleCancelClick = () => {
-        setEditText(todo.todo);
-        setEdit(false);
+        setEditedText('');
+    };
+
+    const handleEditedText = (e: { target: { value: SetStateAction<string> } }) => {
+        setEditedText(e.target.value);
     };
 
     return (
         <div className="item">
             <input type="checkbox" checked={todo.completed} onChange={() => complete(todo.id)} />
-            {edit ? (
+            {editedText ? (
                 <div>
                     <input
                         type="text"
-                        value={editText}
-                        onChange={(e) => setEditText(e.target.value)}
+                        value={editedText}
+                        onChange={handleEditedText}
                         className="edit-input"
                     />
                     <button onClick={handleSaveClick} className="save-button">
@@ -60,7 +58,7 @@ export const ToDoItem: React.FC<Props> = ({ todo }) => {
                     src="https://cdn1.iconfinder.com/data/icons/jumpicon-basic-ui-glyph-1/32/-_Trash-Can--256.png"
                 />
             </button>
-            <button onClick={handleEditClick}>
+            <button onClick={() => setEditedText(todo.todo)}>
                 <img
                     alt="Edit"
                     src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/pencil-edit-write-draw-stationary-512.png"
