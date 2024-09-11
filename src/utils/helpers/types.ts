@@ -19,11 +19,15 @@ export interface IAddTodoItem {
 
 export interface ITodosContextType {
     state: ITodo[];
-    filter:string,
-    setFilter: (filter: string) => void;
     setState: (todos: ITodo[]) => void;
     remove: (id: number) => void;
     complete: (id: number) => void;
     update: (id: number, todo: string) => void;
     addTodo: (todo: IAddTodoItem) => void;
+}
+
+export interface ITodosFilterType {
+    filter: number;
+    setFilter: (filter: number) => void;
+
 }

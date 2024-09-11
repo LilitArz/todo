@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { ToDoContext } from '../TodoContext';
+import { ToDoContext } from '../utils/helpers/contexts';
 
 interface IFormInput {
     title: string;

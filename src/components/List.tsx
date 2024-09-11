@@ -1,24 +1,35 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { ToDoItem } from './ToDoItem';
-import { ToDoContext } from '../TodoContext';
+import { ContextForFilter, ToDoContext } from '../utils/helpers/contexts';
 import { Link } from 'react-router-dom';
+import { ToDoFilter } from './ToDoFilter';
+import { FILTER_KEYS } from '../utils/enum';
 
 export const List: React.FC = () => {
-    const { state, filter } = useContext(ToDoContext);
+    const { state } = useContext(ToDoContext);
+    const { filter } = useContext(ContextForFilter);
 
-    const filterTodos = state.filter((todo) =>
-        filter === 'Done' ? todo.completed : filter === 'Not Done' ? !todo.completed : true,
-    );
-
+    const filteredTodos = useMemo(() => {
+        return state.filter((todo) => {
+            switch (filter) {
+                case FILTER_KEYS.done:
+                    return todo.completed;
+                case FILTER_KEYS.notDone:
+                    return !todo.completed;
+                default:
+                    return true;
+            }
+        });
+    }, [state, filter]);
     return (
         <div className="todo-list">
+            <h1>TODO LIST</h1>
             <Link className="link-button" to="/addtodo">
                 Add Task
             </Link>
+            <ToDoFilter />
 
-            <h1>TODO LIST</h1>
-
-            {filterTodos.map((todo) => (
+            {filteredTodos.map((todo) => (
                 <div key={todo.id} className="todo-item">
                     <ToDoItem todo={todo} />
                 </div>

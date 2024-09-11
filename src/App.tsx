@@ -1,18 +1,22 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Context } from './Context';
+import { Context } from './components/Context';
 import { AddToDos } from './components/AddToDo';
-import { Homepage } from './HomePage';
+import { ToDoList } from './components/ToDoList';
+import { FilterContext } from './components/FilterContext';
 
 const App = () => {
     return (
         <Context>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Homepage />} />
-                    <Route path="addtodo" element={<AddToDos />} />
-                </Routes>
-            </BrowserRouter>
+            <FilterContext>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<ToDoList />} />
+                        <Route path="addtodo" element={<AddToDos />} />
+                        <Route path="*" element={<Navigate to="/" replace />} />
+                    </Routes>
+                </BrowserRouter>
+            </FilterContext>
         </Context>
     );
 };
