@@ -1,13 +1,13 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { StateContext } from './components/StateContext';
+import { TodosContext } from './components/TodosContext';
 import { AddToDos } from './components/AddToDo';
 import { ToDoList } from './components/ToDoList';
 import { FilterContext } from './components/FilterContext';
 
 const App = () => {
     return (
-        <StateContext>
+        <TodosContext>
             <FilterContext>
                 <BrowserRouter>
                     <Routes>
@@ -17,7 +17,7 @@ const App = () => {
                     </Routes>
                 </BrowserRouter>
             </FilterContext>
-        </StateContext>
+        </TodosContext>
     );
 };
 
