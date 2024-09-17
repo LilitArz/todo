@@ -62,3 +62,45 @@ select {
   box-sizing: border-box;
   justify-content:flex-end
 }
+form {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+  width: 500px;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="checkbox"] {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form input[type="checkbox"] {
+  width: auto;
+}
+
+form button {
+  background-color: rgb(103, 103, 227);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+form button:disabled {
+  background-color: #a3b5f5;
+  cursor: not-allowed;
+}
+
+label {
+  margin-right: 10px;
+}

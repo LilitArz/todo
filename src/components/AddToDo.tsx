@@ -1,91 +1,101 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { ToDoContext } from '../utils/helpers/contexts';
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import * as Yup from 'Yup';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup'
 
 interface IFormInput {
     title: string;
+    requiredCheckbox: boolean;
+    doneCheckbox: boolean;
+    maxCharacters?: number
 }
 
 export const AddToDos = () => {
-    const [inputMaxLimit, setInputMaxLimit] = useState<number | null>(null);
-    const [completed, setCompleted] = useState<boolean>(false);
-
-    const handleTextMaxLimit = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputMaxLimit(parseInt(e.target.value));
-    };
-    const {
-        handleSubmit,
-        register,
-        formState: { errors },
-    } = useForm<IFormInput>();
-
-    const handleFirstCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCompleted(e.target.checked);
-    };
-    const handleSecondCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (!completed) setCompleted(e.target.checked);
-    };
-
     const { addTodo } = useContext(ToDoContext);
     const navigate = useNavigate();
+
+    const validationSchema = Yup.object().shape({
+        title: Yup.string()
+            .required('Fill the field'),
+        requiredCheckbox: Yup.boolean().required(),
+        doneCheckbox: Yup.boolean().required(),
+        // maxCharacters: Yup.number().nullable()
+    });
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm<IFormInput>({
+        resolver: yupResolver(validationSchema),
+    });
+
+    const isRequiredChecked = watch('requiredCheckbox', false);
+    const isDoneChecked = watch('doneCheckbox', false);
+    const maxCharacters = watch('maxCharacters');
+
+    const isAddButtonDisabled = isRequiredChecked ? !isDoneChecked : false;
+
     const handleAdd: SubmitHandler<IFormInput> = (data) => {
-        const newTodos = {
+        const newTodo = {
             todo: data.title,
-            completed,
+            completed: data.doneCheckbox,
             userId: 1,
         };
 
-        addTodo(newTodos);
+        addTodo(newTodo);
         navigate('/');
     };
 
     return (
         <>
-            <form onSubmit={handleSubmit(handleAdd)} id="form'sSubmit">
+            <form onSubmit={handleSubmit(handleAdd)} id="formSubmit">
                 <div>
                     <input
                         type="checkbox"
-                        name="checkboxRequired"
-                        checked={completed}
-                        onChange={handleFirstCheckboxChange}
+                        id="required"
+                        {...register("requiredCheckbox")}
                     />
-                    <label htmlFor="checkboxRequired">Required</label>
+                    <label htmlFor="required">Required</label>
                 </div>
+
                 <div>
                     <input
                         type="number"
-                        onChange={handleTextMaxLimit}
-                        placeholder="todo's max characters"
+                        placeholder="Max characters"
+                        {...register("maxCharacters")}
+                        min={0}
                     />
                 </div>
-                {errors.title && <p style={{ color: 'red' }}>{errors.title.message}</p>}
+
                 <div>
+                    {errors.title && <p style={{ color: 'red' }}>{errors.title.message}</p>}
                     <input
                         type="text"
-                        {...register('title', {
-                            required: 'Fill the field',
-                            maxLength: inputMaxLimit || undefined,
-                        })}
-                        maxLength={inputMaxLimit || undefined}
+                        {...register('title')}
+                        maxLength={maxCharacters}
                     />
                 </div>
+
                 <div>
                     <input
                         type="checkbox"
-                        name="checkboxDone"
-                        checked={completed}
-                        onChange={handleSecondCheckboxChange}
-                        disabled={completed}
+                        id="done"
+                        {...register("doneCheckbox")}
                     />
-                    <label htmlFor="checkbxDone">Done</label>
+                    <label htmlFor="done">Done</label>
                 </div>
+
+                <button 
+                    type="submit" 
+                    form="formSubmit" 
+                    disabled={isAddButtonDisabled}>
+                    Add Todo
+                </button>
             </form>
-            <button type="submit" form="form'sSubmit">
-                Add Todo
-            </button>
         </>
     );
 };
