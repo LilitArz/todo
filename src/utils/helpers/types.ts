@@ -10,11 +10,14 @@ export interface ITodo {
     todo: string;
     completed: boolean;
     userId: number;
+    deadline: string
+
 }
 export interface IAddTodoItem {
     todo: string;
     completed: boolean;
     userId: number;
+    deadline: string
 }
 
 export interface ITodosContextType {

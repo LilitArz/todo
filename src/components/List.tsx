@@ -25,14 +25,16 @@ export const List: React.FC = () => {
     return (
         <div className="todo-list">
             <h1>TODO LIST</h1>
-            <Link className="link-button" to="/add-todo">
-                Add Task
-            </Link>
-            <ToDoFilter />
+            <div className="container">
+                <Link className='link-button' to="/add-todo">
+                    Add Task
+                </Link>
+                <ToDoFilter />
+            </div>
 
             {filteredTodos.map((todo) => (
                 <div key={todo.id} className="todo-item">
-                    <ToDoItem todo={todo} />
+                    <ToDoItem todoItem={todo} />
                 </div>
             ))}
         </div>
