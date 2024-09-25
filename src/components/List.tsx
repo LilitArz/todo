@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
 import { ToDoItem } from './ToDoItem';
-import { ContextForFilter, ToDoContext } from '../utils/helpers/contexts';
+import { ContextForFilter, ToDoContext } from '../contexts';
 import { Link } from 'react-router-dom';
 import { ToDoFilter } from './ToDoFilter';
 import { FILTER_KEYS } from '../utils/enum';
@@ -26,17 +26,16 @@ export const List: React.FC = () => {
         <div className="todo-list">
             <h1>TODO LIST</h1>
             <div className="container">
-                <Link className='link-button' to="/add-todo">
+                <Link className="link-button" to="/add-todo">
                     Add Task
                 </Link>
                 <ToDoFilter />
             </div>
-
-            {filteredTodos.map((todo) => (
-                <div key={todo.id} className="todo-item">
-                    <ToDoItem todoItem={todo} />
-                </div>
-            ))}
-        </div>
+            <div >
+                {filteredTodos.map((todo) => (
+                    <ToDoItem key={todo.id} todoItem={todo} />
+                ))}
+            </div>
+         </div>
     );
 };

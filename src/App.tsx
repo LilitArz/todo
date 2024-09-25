@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { TodosContext } from './components/TodosContext';
 import { AddToDos } from './components/AddToDo';
-import { ToDoList } from './components/ToDoList';
+import { List } from './components/List';
 import { FilterContext } from './components/FilterContext';
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
             <FilterContext>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<ToDoList />} />
+                        <Route path="/" element={<List />} />
                         <Route path="add-todo" element={<AddToDos />} />
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>

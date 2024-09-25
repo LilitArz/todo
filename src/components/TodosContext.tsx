@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { ITodo, IAddTodoItem } from '../utils/helpers/types';
-import { TODOS } from '../utils/helpers/constants';
-import { ToDoContext } from '../utils/helpers/contexts';
+import { TODOS } from '../utils/constants';
+import { ToDoContext } from '../contexts';
 
 export const TodosContext: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [todos, setTodos] = useState<ITodo[]>(TODOS);

@@ -11,9 +11,12 @@ body {
 }
 
 .todo-list {
+
+  justify-content: center;
+  align-items: center;
   background-color: whitesmoke; 
   padding: 20px;
-  border-radius: 8px; 
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   width: 1000px;
   position: relative;
@@ -21,12 +24,12 @@ body {
 }
 
 .todo-item {
-  background-color: white; 
   padding: 10px;
   border-radius: 4px; 
   margin-bottom: 10px; 
 }
 .item {
+  background-color: rgb(234, 233, 233); 
   display: flex;
   align-items: center;
   gap: 10px;

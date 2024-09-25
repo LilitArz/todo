@@ -10,14 +10,13 @@ export interface ITodo {
     todo: string;
     completed: boolean;
     userId: number;
-    deadline: string
-
+    deadline: string;
 }
 export interface IAddTodoItem {
     todo: string;
     completed: boolean;
     userId: number;
-    deadline: string
+    deadline: string;
 }
 
 export interface ITodosContextType {
@@ -32,5 +31,4 @@ export interface ITodosContextType {
 export interface ITodosFilterType {
     filter: number;
     setFilter: (filter: number) => void;
-
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { ITodosContextType, ITodosFilterType } from './types';
-import { FILTER_KEYS } from '../enum';
+import { ITodosContextType, ITodosFilterType } from './utils/helpers/types';
+import { FILTER_KEYS } from './utils/enum';
 
 export const ToDoContext = React.createContext<ITodosContextType>({
     todos: [],
@@ -14,4 +14,4 @@ export const ToDoContext = React.createContext<ITodosContextType>({
 export const ContextForFilter = React.createContext<ITodosFilterType>({
     filter: FILTER_KEYS.all,
     setFilter: () => {},
-})
+});
